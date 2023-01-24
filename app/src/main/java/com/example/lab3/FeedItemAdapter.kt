@@ -27,6 +27,16 @@ class FeedItemAdapter : RecyclerView.Adapter<FeedItemAdapter.FeedItemViewHolder>
         notifyDataSetChanged()
     }
 
+    fun addItem() {
+        if (feedItems.size == 0) {
+            feedItems.add(FeedItem("Title 0", "Description 0"))
+        }
+        else {
+            feedItems.add(FeedItem("Title ${feedItems.size}", "Description ${feedItems.size}"))
+        }
+        notifyDataSetChanged()
+    }
+
     class FeedItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = FeedItemBinding.bind(itemView)
         fun bind(feedItem: FeedItem) = with(binding) {
