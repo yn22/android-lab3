@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lab3.databinding.FeedItemBinding
+import com.example.lab3.model.FeedItem
 
 class FeedItemAdapter : RecyclerView.Adapter<FeedItemAdapter.FeedItemViewHolder>() {
     private var feedItems = ArrayList<FeedItem>()
@@ -24,16 +25,6 @@ class FeedItemAdapter : RecyclerView.Adapter<FeedItemAdapter.FeedItemViewHolder>
 
     fun setList(feedItems: ArrayList<FeedItem>) {
         this.feedItems = feedItems
-        notifyDataSetChanged()
-    }
-
-    fun addItem() {
-        if (feedItems.size == 0) {
-            feedItems.add(FeedItem("Title 0", "Description 0"))
-        }
-        else {
-            feedItems.add(FeedItem("Title ${feedItems.size}", "Description ${feedItems.size}"))
-        }
         notifyDataSetChanged()
     }
 
