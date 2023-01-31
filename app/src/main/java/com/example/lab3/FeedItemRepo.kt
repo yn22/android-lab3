@@ -16,6 +16,12 @@ class FeedItemRepo(private val feedItemDao: FeedItemDao) {
         feedItemDao.insert(feedItem)
     }
 
+    suspend fun insert(feedItems: List<FeedItem>) {
+        for (feedItem in feedItems) {
+            feedItemDao.insert(feedItem)
+        }
+    }
+
     suspend fun deleteAll() {
         feedItemDao.deleteAll()
     }

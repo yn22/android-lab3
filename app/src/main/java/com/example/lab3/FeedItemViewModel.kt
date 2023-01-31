@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.lab3.api.FeedItemInterface
+import com.example.lab3.api.RetrofitHelper
 import com.example.lab3.model.FeedItem
 import kotlinx.coroutines.launch
 
@@ -28,6 +30,21 @@ class FeedItemViewModel(application: Application) : AndroidViewModel(application
     fun deleteAll() {
         viewModelScope.launch {
             feedItemRepo.deleteAll()
+        }
+    }
+
+    fun getExternalData() {
+        val url = "http://10.0.2.2:3000"
+        val retrofitClient = RetrofitHelper.getInstance(url).create(FeedItemInterface::class.java)
+        viewModelScope.launch {
+            try {
+                val response = retrofitClient.getItems()
+                if (response.isSuccessful) {
+                    response.body()?.let { feedItemRepo.insert(it) }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }

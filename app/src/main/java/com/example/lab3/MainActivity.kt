@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.btnAddItem.setOnClickListener(this)
         binding.btnDeleteAll.setOnClickListener(this)
+        binding.getExternalData.setOnClickListener(this)
 
         feedItemViewModel = ViewModelProvider(this)[FeedItemViewModel::class.java]
         feedItemViewModel.readAllData.observe(this) { feedItems ->
@@ -37,6 +38,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.btnDeleteAll -> {
                 feedItemViewModel.deleteAll()
+            }
+            R.id.getExternalData -> {
+                feedItemViewModel.getExternalData()
             }
         }
     }
